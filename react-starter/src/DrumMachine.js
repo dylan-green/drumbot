@@ -63,8 +63,8 @@ export default class DrumMachine extends React.Component {
   selectStep = (instrument, step) => {
     this.state.pattern.tracks.forEach((track) => {
       if (track.instrument === instrument) { track.steps[step] = !track.steps[step]; }
-      this.audioEngine.setPattern(this.state.pattern);
     });
+    this.audioEngine.setPattern(this.state.pattern);
   }
 
   selectPattern(index) {
