@@ -60,6 +60,13 @@ export default class DrumMachine extends React.Component {
     this.setState({ position });
   }
 
+  selectStep = (instrument, step) => {
+    this.state.pattern.tracks.forEach((track) => {
+      if (track.instrument === instrument) { track.steps[step] = !track.steps[step]; }
+      this.audioEngine.setPattern(this.state.pattern);
+    });
+  }
+
   selectPattern(index) {
     if (index < 0) index = this.state.patterns.length - 1;
     if (index >= this.state.patterns.length) index = 0;
@@ -73,6 +80,7 @@ export default class DrumMachine extends React.Component {
       pattern => {
         this.setState({ pattern, patternIndex: index, loading: false });
         this.audioEngine.setPattern(pattern);
+        console.log(pattern);
       }
     );
   }
@@ -144,7 +152,9 @@ export default class DrumMachine extends React.Component {
               <div className='DrumMachine__TrackLabel'>{track.instrument}</div>
               <div className='DrumMachine__TrackSteps'>
                 {track.steps.map((trackStep, i) => (
-                  <div className={`DrumMachine__Step DrumMachine__Step--${step === i ? 'Active' : 'Inactive'} DrumMachine__Step--${trackStep ? 'On' : 'Off'}`} key={i}>
+                  <div 
+                    onClick={() => {this.selectStep(track.instrument, i)}}
+                    className={`DrumMachine__Step DrumMachine__Step--${step === i ? 'Active' : 'Inactive'} DrumMachine__Step--${trackStep ? 'On' : 'Off'}`} key={i}>
                   </div>
                 ))}
               </div>
@@ -152,10 +162,6 @@ export default class DrumMachine extends React.Component {
           ))}
         </div>
 
-        <div className='DrumMachine__Footer'>
-          <div>Join the fun at <a href='https://noopschallenge.com'>noopschallenge.com</a></div>
-          <div><a href='https://github.com/noops-challenge/drumbot'>Fork me on GitHub</a></div>
-        </div>
       </div>
     );
   }
