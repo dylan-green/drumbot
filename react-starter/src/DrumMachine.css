@@ -15,7 +15,7 @@
 }
 
 .DrumMachine a:hover {
-  color: yellow;
+  color: rgb(255, 199, 0);
 }
 
 @media (min-width: 920px) {
@@ -29,14 +29,14 @@
   background-color: #222222;
   border: 2px solid #888888;
   border-radius: 5px;
-  box-shadow: 1px 0 0 #ABCDEF, 0 1px 0 #FEDCAB;
+  box-shadow: 1px 0 0 rgb(255, 255, 255), 0 1px 0 rgb(133, 133, 133);
   transition: all 0.3s ease-in-out;
   height: 40px;
 }
 
 
 .DrumMachine button:active {
-  background-color: yellow;
+  background-color: rgb(255, 199, 0);
   color: #222222;
   box-shadow: -1px 0 0 #ABCDEF, 0 -1px 0 #FEDCAB;
   transition: 0.01s ease-in-out;
@@ -90,17 +90,17 @@ button:disabled {
 .DrumMachine__PatternSelector {
   font-family: 'VT323', monospace;
   font-weight: bold;
-  color: yellow;
+  color: rgb(255, 199, 0);
   font-size: 32px;
   text-transform: uppercase;
   height: 40px;
 }
 
 .DrumMachine__PatternButton button{
-  background: black;
+  background: rgb(85, 85, 85);
   font-family: 'VT323', monospace;
   font-weight: bold;
-  color: yellow;
+  color: rgb(255, 199, 0);
   font-size: 32px;
   width: 100%;
   padding: 0 10px;
@@ -144,7 +144,7 @@ button:disabled {
 .DrumMachine__StartStopButton {
   font-family: 'VT323', monospace;
   font-weight: bold;
-  color: yellow;
+  color: rgb(255, 199, 0);
   font-size: 32px;
   text-transform: uppercase;
 
@@ -153,7 +153,7 @@ button:disabled {
 }
 
 .DrumMachine__StartStopButton:hover {
-  border-color: yellow;
+  border-color: rgb(255, 199, 0);
 
 }
 
@@ -165,7 +165,7 @@ button:disabled {
   max-width: 100%;
   padding: 10px;
   margin: 10px auto;
-  background-color: #999;
+  background-color: rgb(68, 68, 68);
   border-radius: 5px;
 }
 
@@ -208,18 +208,18 @@ button:disabled {
 }
 
 .DrumMachine__Step--On {
-  background: #9999EE;
-  border: 2px solid #BBBBBB;
+  background: rgb(84, 153, 220);
+  border: 2px solid rgb(170, 170, 170);
   transition: background-color 500ms ease-out;
 }
 
 .DrumMachine__Step--Active {
-  border: 2px solid #DDAAAA;
+  border: 2px solid rgba(255, 255, 255, 0.842);
   background: #777777
 }
 
 .DrumMachine__Step--Active.DrumMachine__Step--On {
-  background: yellow;
+  background: rgb(255, 199, 0);
   transition: background-color 10ms !important;
 }
 
@@ -238,7 +238,7 @@ button:disabled {
   animation: throb 1s infinite;
 }
 .DrumMachine__GetStarted button:hover {
-  background-color: yellow;
+  background-color: rgb(255, 199, 0);
   color: black;
 }
 

@@ -64,6 +64,7 @@ export default class DrumMachine extends React.Component {
     this.state.pattern.tracks.forEach((track) => {
       if (track.instrument === instrument) { track.steps[step] = !track.steps[step]; }
     });
+    this.setState(this.state.pattern);
     this.audioEngine.setPattern(this.state.pattern);
   }
 
@@ -80,7 +81,6 @@ export default class DrumMachine extends React.Component {
       pattern => {
         this.setState({ pattern, patternIndex: index, loading: false });
         this.audioEngine.setPattern(pattern);
-        console.log(pattern);
       }
     );
   }
@@ -105,7 +105,7 @@ export default class DrumMachine extends React.Component {
       return (
         <div className='DrumMachine'>
           <div className='DrumMachine__GetStarted'>
-            <p>Welcome to drumbot</p>
+            <p>Welcome to DrumBot</p>
             <button className='DrumMachine__StartStopButton' onClick={this.powerOn}>Start!</button>
           </div>
         </div>
@@ -119,10 +119,7 @@ export default class DrumMachine extends React.Component {
         <div className='DrumMachine__TopPanel'>
           <div className="DrumMachine__Logo">
             <div className="DrumMachine__Title">
-              PR-606
-            </div>
-            <div className="DrumMachine__SubTitle">
-              FORKABLE DRUM COMPUTER
+              CR-78
             </div>
           </div>
           {this.state.poweredOn && (
