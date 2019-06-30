@@ -11,23 +11,26 @@ const WebAudioCtor = window.AudioContext || window.webkitAudioContext;
 function initializeFirstContext() {
   const desiredSampleRate = 44100;
 
-  var context = createNewContext()
+  var context = createNewContext();
 
   // in iOS, need to set the sample rate after initializing a context
   // SEE: https://stackoverflow.com/questions/29901577/distorted-audio-in-ios-7-1-with-webaudio-api
-  if (/(iPhone|iPad)/i.test(navigator.userAgent) && context.sampleRate !== desiredSampleRate) {
-    const buffer = context.createBuffer(1, 1, desiredSampleRate)
-    const dummy = context.createBufferSource()
-    dummy.buffer = buffer
-    dummy.connect(context.destination)
-    dummy.start(0)
-    dummy.disconnect()
+  if (
+    /(iPhone|iPad)/i.test(navigator.userAgent) &&
+    context.sampleRate !== desiredSampleRate
+  ) {
+    const buffer = context.createBuffer(1, 1, desiredSampleRate);
+    const dummy = context.createBufferSource();
+    dummy.buffer = buffer;
+    dummy.connect(context.destination);
+    dummy.start(0);
+    dummy.disconnect();
 
-    context.close() // dispose old context
+    context.close(); // dispose old context
     return createNewContext();
   }
 
-  return context
+  return context;
 }
 
 function createNewContext() {
@@ -46,15 +49,28 @@ export default class AudioEngine {
     this.soundPlayer = new SoundPlayer();
   }
 
-
   prepare = () => this.soundPlayer.prepare(this.context);
+
+  getIdleTracks = () => {
+    const stepCount = this.pattern.stepCount;
+    const instruments = Object.entries(this.soundPlayer.instruments);
+    const tracks = this.pattern.tracks.map(track => track.instrument);
+    this.idleTracks = instruments
+      .map(([key, val]) => {
+        return !tracks.includes(key)
+          ? { instrument: key, steps: new Array(stepCount).fill(0) }
+          : null;
+      })
+      .filter(track => track != null);
+  };
 
   setPattern(pattern) {
     this.pattern = pattern;
+    this.getIdleTracks();
   }
 
-  startClock = (beatsPerMinute) => {
-    this.stepsPerSecond = beatsPerMinute / 60 * 4;
+  startClock = beatsPerMinute => {
+    this.stepsPerSecond = (beatsPerMinute / 60) * 4;
     this.context = createNewContext();
 
     this.playing = true;
@@ -62,7 +78,7 @@ export default class AudioEngine {
     this.context.resume();
 
     this.onTick();
-  }
+  };
 
   stopClock = () => {
     this.playing = false;
@@ -70,7 +86,7 @@ export default class AudioEngine {
 
     this.context.suspend();
     this.context.close();
-  }
+  };
 
   onTick = () => {
     const currentStepAbsolute = this.getStepAbsolute(this.context.currentTime);
@@ -79,19 +95,18 @@ export default class AudioEngine {
     }
     if (this.playing) {
       requestAnimationFrame(this.onTick);
-    }
-    else {
+    } else {
       this.position = defaultPosition;
-      this.onStep({ position: this.position});
+      this.onStep({ position: this.position });
     }
-  }
+  };
 
   getStepAbsolute(timing) {
     return Math.floor((timing - leaderTime) * this.stepsPerSecond);
   }
 
   setCurrentStepAbsolute(absoluteStepCount) {
-    this.onStep({ position: this.getPosition(absoluteStepCount)});
+    this.onStep({ position: this.getPosition(absoluteStepCount) });
 
     // schedule the sounds one beat ahead so the timing is exact
     this.scheduleSounds(this.getPosition(absoluteStepCount + 1));
@@ -104,10 +119,10 @@ export default class AudioEngine {
       step: absoluteStepCount % stepCount,
       timing: absoluteStepCount / this.stepsPerSecond + leaderTime,
       absolute: absoluteStepCount
-    }
+    };
   }
 
-  scheduleSounds = (position) =>  {
+  scheduleSounds = position => {
     if (!this.playing) return;
     this.pattern.tracks.forEach(track => {
       if (track.steps[position.step]) {
@@ -118,5 +133,5 @@ export default class AudioEngine {
         });
       }
     });
-  }
+  };
 }
