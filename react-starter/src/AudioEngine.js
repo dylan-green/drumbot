@@ -51,7 +51,7 @@ export default class AudioEngine {
 
   prepare = () => this.soundPlayer.prepare(this.context);
 
-  getIdleTracks = () => {
+  setIdleTracks = () => {
     const { stepCount, tracks } = this.pattern;
     const instruments = Object.entries(this.soundPlayer.instruments);
     this.idleTracks = instruments
@@ -67,7 +67,7 @@ export default class AudioEngine {
     const previousPattern = this.pattern;
     this.pattern = pattern;
     if (!previousPattern || previousPattern !== pattern) {
-      this.getIdleTracks();
+      this.setIdleTracks();
     }
   }
 
