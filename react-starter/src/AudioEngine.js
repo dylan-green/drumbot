@@ -52,12 +52,11 @@ export default class AudioEngine {
   prepare = () => this.soundPlayer.prepare(this.context);
 
   getIdleTracks = () => {
-    const stepCount = this.pattern.stepCount;
+    const { stepCount, tracks } = this.pattern;
     const instruments = Object.entries(this.soundPlayer.instruments);
-    const tracks = this.pattern.tracks.map(track => track.instrument);
     this.idleTracks = instruments
       .map(([key, val]) => {
-        return !tracks.includes(key)
+        return !tracks.map(track => track.instrument).includes(key)
           ? { instrument: key, steps: new Array(stepCount).fill(0) }
           : null;
       })
@@ -65,8 +64,11 @@ export default class AudioEngine {
   };
 
   setPattern(pattern) {
+    const previousPattern = this.pattern;
     this.pattern = pattern;
-    this.getIdleTracks();
+    if (!previousPattern || previousPattern !== pattern) {
+      this.getIdleTracks();
+    }
   }
 
   startClock = beatsPerMinute => {

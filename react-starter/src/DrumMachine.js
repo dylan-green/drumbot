@@ -13,7 +13,8 @@ export default class DrumMachine extends React.Component {
     startTime: 0,
     position: {},
     pattern: {
-      tracks: []
+      tracks: [],
+      idleTracks: []
     }
   };
 
@@ -56,12 +57,11 @@ export default class DrumMachine extends React.Component {
 
   startClock = () => {
     this.audioEngine.startClock(this.state.pattern.beatsPerMinute);
-
     this.setState({ playing: true });
   };
+
   stopClock = () => {
     this.audioEngine.stopClock();
-
     this.setState({ playing: false });
   };
 
@@ -90,8 +90,8 @@ export default class DrumMachine extends React.Component {
     fetch(`${apiHost}/drumbot/patterns/${pattern.name}`)
       .then(r => r.json())
       .then(pattern => {
-        this.setState({ pattern, patternIndex: index, loading: false });
         this.audioEngine.setPattern(pattern);
+        this.setState({ pattern, patternIndex: index, loading: false });
       });
   }
 
@@ -169,14 +169,14 @@ export default class DrumMachine extends React.Component {
               <div className='DrumMachine__TrackSteps'>
                 {track.steps.map((trackStep, i) => (
                   <div
+                    key={i}
                     onClick={() => {
                       this.selectStep(track.instrument, i);
                     }}
                     className={`DrumMachine__Step DrumMachine__Step--${
                       step === i ? 'Active' : 'Inactive'
-                    } DrumMachine__Step--${trackStep ? 'On' : 'Off'}`}
-                    key={i}
-                  />
+                    } DrumMachine__Step--${trackStep ? 'On' : 'Off'}`}>
+                  </div>
                 ))}
               </div>
             </div>
