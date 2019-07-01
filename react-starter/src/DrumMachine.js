@@ -13,8 +13,7 @@ export default class DrumMachine extends React.Component {
     startTime: 0,
     position: {},
     pattern: {
-      tracks: [],
-      idleTracks: []
+      tracks: []
     }
   };
 
@@ -127,6 +126,8 @@ export default class DrumMachine extends React.Component {
       position: { step }
     } = this.state;
 
+    const idleTracks = this.audioEngine.idleTracks;
+
     return (
       <div className='DrumMachine'>
         <div className='DrumMachine__TopPanel'>
@@ -175,12 +176,18 @@ export default class DrumMachine extends React.Component {
                     }}
                     className={`DrumMachine__Step DrumMachine__Step--${
                       step === i ? 'Active' : 'Inactive'
-                    } DrumMachine__Step--${trackStep ? 'On' : 'Off'}`}>
-                  </div>
+                    } DrumMachine__Step--${trackStep ? 'On' : 'Off'}`}
+                  />
                 ))}
               </div>
             </div>
           ))}
+          {idleTracks &&
+            idleTracks.map((track, i) => (
+              <div className='DrumMachine__Track' key={i}>
+                <div className='DrumMachine__TrackLabel'>{track.instrument}</div>
+              </div>
+            ))}
         </div>
       </div>
     );
