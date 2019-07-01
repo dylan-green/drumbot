@@ -94,6 +94,16 @@ export default class DrumMachine extends React.Component {
       });
   }
 
+  addTrack = track => {
+    const idleTracks = this.audioEngine.idleTracks;
+    this.state.pattern.tracks.push(track);
+    this.audioEngine.setPattern(this.state.pattern);
+    this.audioEngine.idleTracks = idleTracks.filter(
+      t => t.instrument !== track.instrument
+    );
+    this.setState(this.state.pattern);
+  };
+
   nextPattern = () => {
     this.selectPattern(this.state.patternIndex + 1);
   };
@@ -184,10 +194,13 @@ export default class DrumMachine extends React.Component {
           ))}
           {idleTracks &&
             idleTracks.map((track, i) => (
-              <div key={i}>
-                <div className='DrumMachine__TrackLabel'>
+              <div className='DrumMachine__TrackLabel' key={i}>
+                <button
+                  onClick={() => {
+                    this.addTrack(track);
+                  }}>
                   &#43; {track.instrument}
-                </div>
+                </button>
               </div>
             ))}
         </div>

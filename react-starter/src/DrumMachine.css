@@ -147,14 +147,12 @@ button:disabled {
   color: rgb(255, 199, 0);
   font-size: 32px;
   text-transform: uppercase;
-
   min-width: 90px;
   flex: 1 0;
 }
 
 .DrumMachine__StartStopButton:hover {
   border-color: rgb(255, 199, 0);
-
 }
 
 .DrumMachine__Tracks {
@@ -175,6 +173,21 @@ button:disabled {
   text-align: left;
   font-family: 'Righteous', monospace;
   font-size: 18px;
+  width: fit-content;
+  width: -moz-fit-content
+}
+
+.DrumMachine__TrackLabel button {
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: 'Righteous', monospace;
+  margin: 5px
+}
+
+.DrumMachine__TrackLabel:hover {
+  color: rgb(255, 199, 0);
+  cursor: default
 }
 
 .DrumMachine__TrackSteps {
