@@ -44,9 +44,9 @@ Also note that on some mobile devices, WebAudio only plays through headphones &n
 
 The [WebAudio page on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) is a good place to start learning about the WebAudio API.
 
-## Ideas to try
+## Future Tasks
 
-Here are a few ideas for you to try:
+Here are a few ideas to extend the drumbot.
 
 #### Change the sounds
 
@@ -76,42 +76,8 @@ You can even get crazy and move sounds around in 3D with a [PannerNode](https://
 
 A revolutionary feature on the [Linn LM-1](https://en.wikipedia.org/wiki/Linn_LM-1), one of the earliest drum machines, was "Swing" - the ability to make the beat "swing" by slightly changing the timing of every other step. Most drum machines since then have included some sort of swing control.  Try adding one to this drum machine.
 
-#### Spice up the design!
-
-Drumbot is not a designer. Are you? Let's see what you got.
-
-#### Create your own drum pattern API.
-
-Can you reverse-engineer the drumbot API and create your own beats? Show us.
-
 #### Add visualizations
 
 Use [AudioContext.createAnalyser](https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createAnalyser) to analyze the audio data. Create a sound meter or do something else awesome!
-
-#### Change the pattern!
-
-Enable changing the pattern by toggling each spet on or off.
-
-## Nevermind the starter; I want to roll my own!
-
-Great! Here are some ideas to get you started.
-
-#### Use a different programming language
-
-Most languages and platforms out there can play music, with a little help from a library or two. What's your favorite language?
-
-#### Connect to other devices
-
- Connect to a real drum machine! Hook these patterns up to your favorite music program! Make your smart microwave heat up pizza to the beatza!
-
-### Visualize the rhythm
-
-Playing sounds is just one of them. Build something else cool with these repeating patterns. Light up your smart lightbulbs or anything else.
-
-## Show drumbot what you made!
-
-Push your work up to your own fork.
-
-
 
 More about Drumbot here: https://noopschallenge.com/challenges/drumbot
