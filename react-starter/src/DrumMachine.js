@@ -97,11 +97,20 @@ export default class DrumMachine extends React.Component {
   addTrack = track => {
     const idleTracks = this.audioEngine.idleTracks;
     this.state.pattern.tracks.push(track);
+    this.setState(this.state.pattern);
     this.audioEngine.setPattern(this.state.pattern);
     this.audioEngine.idleTracks = idleTracks.filter(
       t => t.instrument !== track.instrument
     );
-    this.setState(this.state.pattern);
+  };
+
+  removeTrack = track => {
+    const tracks = this.state.pattern.tracks.filter(
+      t => t.instrument !== track.instrument
+    );
+    const pattern = {...this.state.pattern, tracks: tracks}
+    this.setState({pattern});
+    this.audioEngine.setPattern(pattern);
   };
 
   nextPattern = () => {
@@ -176,7 +185,13 @@ export default class DrumMachine extends React.Component {
         <div className='DrumMachine__Tracks'>
           {tracks.map((track, trackIndex) => (
             <div className='DrumMachine__Track' key={trackIndex}>
-              <div className='DrumMachine__TrackLabel'>{track.instrument}</div>
+              <div
+                className='DrumMachine__TrackLabel'
+                onClick={() => {
+                  this.removeTrack(track);
+                }}>
+                {track.instrument}
+              </div>
               <div className='DrumMachine__TrackSteps'>
                 {track.steps.map((trackStep, i) => (
                   <div
