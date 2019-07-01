@@ -1,14 +1,5 @@
 ![](https://user-images.githubusercontent.com/212941/59231343-2a71cd80-8b95-11e9-8bc9-9dfb58467094.png)
 
-## 👋 Drumbot wants you!
-
-Drumbot loves drum machines so much that she made an API dedicated to them.
-Nothing would make her happier than for you to bring this API to life.
-
-Drumbot has included a drum machine written using React and the WebAudio API to help you get started.
-
-You can start with this or create your own from scratch.
-
 ### API
 Drumbot's API has the following methods:
 
