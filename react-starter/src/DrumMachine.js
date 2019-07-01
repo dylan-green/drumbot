@@ -184,8 +184,10 @@ export default class DrumMachine extends React.Component {
           ))}
           {idleTracks &&
             idleTracks.map((track, i) => (
-              <div className='DrumMachine__Track' key={i}>
-                <div className='DrumMachine__TrackLabel'>{track.instrument}</div>
+              <div key={i}>
+                <div className='DrumMachine__TrackLabel'>
+                  &#43; {track.instrument}
+                </div>
               </div>
             ))}
         </div>
