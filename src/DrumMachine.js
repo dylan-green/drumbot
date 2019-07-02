@@ -1,5 +1,5 @@
 import React from 'react';
-import './DrumMachine.css';
+import './styles/DrumMachine.css';
 import { fetch } from 'whatwg-fetch';
 import AudioEngine, { browserSupportsWebAudio } from './AudioEngine';
 const apiHost =
