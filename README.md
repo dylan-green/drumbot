@@ -35,15 +35,9 @@ Also note that on some mobile devices, WebAudio only plays through headphones &n
 
 The [WebAudio page on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) is a good place to start learning about the WebAudio API.
 
-## Future Tasks
-
-Here are a few ideas to extend the drumbot.
+### Additional Features to Implement
 
 #### Change the sounds
-
-This drum machine loads its sounds from samples that are stored in the .wav format.
-
-The sounds are found in the `public/samples` folder. Try replacing these with your own sounds.
 
 If you're feeling adventurous, try synthesizing your own drum sounds using [oscillators](https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createOscillator).
 
